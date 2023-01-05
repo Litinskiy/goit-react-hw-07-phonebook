@@ -5,8 +5,6 @@ import { Label, Input, Wrap } from './Filter.styled';
 export function Filter() {
   const dispatch = useDispatch();
   const filterValue = useSelector(state => state.filter)
-  
-  console.log(filterValue)
 
   return (
     <Wrap>
