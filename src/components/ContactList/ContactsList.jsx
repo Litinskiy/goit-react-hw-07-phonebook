@@ -1,28 +1,38 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { removeContact } from 'components/redux/contactsSlice';
+import { deleteContact } from 'components/redux/operations';
+import { getContactsState } from 'components/redux/selectors';  
 import { Btn, ContactItem } from './ContactsList.styled';
 
 export function ContactsList() {
-  const { contacts } = useSelector(state => state.contacts);
-
+  const {
+    contacts: { items, isLoading, error },
+    filter: filterValue,
+  } = useSelector(getContactsState);
   const dispatch = useDispatch();
-  const filterValue = useSelector(state => state.filter);
-  const filteredContacts = contacts.filter(contact =>
+  const filteredContacts = items.filter(contact =>
     contact.name.toLowerCase().includes(filterValue.toLowerCase())
   )
 
   return (
+    <>
+      {error && <div style={{ color: 'red', fontSize: '20px' }}> { error} </div> }
     <ul>
-      {filteredContacts.map(({ id, name, number }) => {
+      {filteredContacts.map(({ id, name, phone }) => {
+        
         return (
           <ContactItem key={id}>
-            {name}: {number}
-            <Btn type="button" onClick={() => dispatch(removeContact(id))}>
-              Delete
+            {name}: {phone}
+            <Btn
+              type="button"
+              disabled={ isLoading}
+              onClick={() => dispatch(deleteContact(id))}>
+              { isLoading ? 'wait a sec please' : 'Delete'}
             </Btn>
           </ContactItem>
         );
       })}
-    </ul>
+        { isLoading && <li style={{ color: 'blue', fontSize: '20px' }}>Updating...</li> }
+      </ul>
+      </>
   );
 }

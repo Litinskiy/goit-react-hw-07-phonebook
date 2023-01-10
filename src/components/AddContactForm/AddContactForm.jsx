@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'components/redux/contactsSlice'; 
+import { addContact } from 'components/redux/operations'; 
+import { getContactItems } from 'components/redux/selectors';
 import { Form, Label, Input, Btn } from './AddContactForm.styled';
 
 export function AddContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const { contacts } = useSelector(state => state.contacts);
+  const contactItems = useSelector(getContactItems);
   const dispatch = useDispatch();
 
   function onChange(e) {
@@ -27,7 +28,7 @@ export function AddContactForm() {
 
   function onSubmit(e) {
     e.preventDefault();
-    const isInContacts = contacts.find(contact => contact.name === name);
+    const isInContacts = contactItems.find(contact => contact.name === name);
 
     if (isInContacts) {
       alert(
@@ -36,7 +37,7 @@ export function AddContactForm() {
       return;
     }
 
-    dispatch(addContact(name, number));
+    dispatch(addContact({name, phone: number}));
     reset();
   }
 

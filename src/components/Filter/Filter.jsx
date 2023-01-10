@@ -1,17 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'components/redux/filterSlice'; 
+import { useDispatch} from 'react-redux';
+import { setFilter } from 'components/redux/contactsSlice';
 import { Label, Input, Wrap } from './Filter.styled';
 
 export function Filter() {
   const dispatch = useDispatch();
-  const filterValue = useSelector(state => state.filter)
+
 
   return (
     <Wrap>
       <Label>
         Filter by Name
         <Input
-          value={filterValue}
           type="text"
           name="filter"
           onChange={e => dispatch(setFilter(e.currentTarget.value))}
