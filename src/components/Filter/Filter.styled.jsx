@@ -14,5 +14,5 @@ export const Input = styled.input`
   border: 1px solid black;
 `
 export const Wrap = styled.div`
-  width: 315px;
+  width: 330px;
 `

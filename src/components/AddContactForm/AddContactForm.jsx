@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'components/redux/operations'; 
-import { getContactItems } from 'components/redux/selectors';
+import { getContactItems } from 'components/redux/selectors'; 
 import { Form, Label, Input, Btn } from './AddContactForm.styled';
 
 export function AddContactForm() {
@@ -29,15 +29,13 @@ export function AddContactForm() {
   function onSubmit(e) {
     e.preventDefault();
     const isInContacts = contactItems.find(contact => contact.name === name);
-
     if (isInContacts) {
       alert(
         'You already have this dude in your Phonebook!'
       );
       return;
     }
-
-    dispatch(addContact({name, phone: number}));
+    dispatch(addContact({ name, phone: number }));
     reset();
   }
 
