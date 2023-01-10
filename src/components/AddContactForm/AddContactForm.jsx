@@ -31,7 +31,7 @@ export function AddContactForm() {
     const isInContacts = contactItems.find(contact => contact.name === name);
     if (isInContacts) {
       alert(
-        'You already have this dude in your Phonebook!'
+        'It is a surprise!!! You already have this dude in your Phonebook!'
       );
       return;
     }
