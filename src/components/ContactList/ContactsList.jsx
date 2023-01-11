@@ -26,7 +26,7 @@ export function ContactsList() {
                 disabled={isLoading}
                 onClick={() => dispatch(deleteContact(id))}
               >
-                {isLoading ? 'wait please' : 'Delete'}
+                {isLoading ? 'wait' : 'Delete'}
               </Btn>
             </ContactItem>
           );
